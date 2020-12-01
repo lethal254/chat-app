@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useReducer } from "react";
+import { Switch, Route } from "react-router-dom";
+import "./App.css";
+import Chat from "./components/Chat/Chat";
+import Login from "./components/Login/Login";
+import UserContext from "./contexts/UserContext";
+import { auth } from "./firebase";
+import usersReducer from "./reducers/usersReducer";
 
 function App() {
+  const [user, dispatch] = useReducer(usersReducer, null);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        dispatch({
+          type: "LOGIN",
+          user: {
+            id: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
+          },
+        });
+      }
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{ user, dispatch }} className="App">
+      {!user ? <Login /> : false}
+      {user ? (
+        <>
+          <Chat />
+        </>
+      ) : (
+        ""
+      )}
+
+      {console.log(user)}
+    </UserContext.Provider>
   );
 }
 
