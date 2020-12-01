@@ -23,9 +23,15 @@ function Body() {
 
   return (
     <div className={bodyStyles.body}>
-      {messages.map((message) => (
-        <Message content={message.message} userId={message.user.id} />
-      ))}
+      {messages.map((message) => {
+        return (
+          <Message
+            content={message.message}
+            userId={message.user.id}
+            photoUrl={message.user.photoURL}
+          />
+        );
+      })}
     </div>
   );
 }

@@ -10,9 +10,13 @@
   margin-top: 2rem;
   margin-right: 2rem;
   margin-bottom: 1rem;
-  animation: fadeIn ease 2s;
+  animation: fadeIn ease 1s;
   flex-wrap: wrap;
   max-width: 50%;
+}
+
+.content {
+  margin: 1rem;
 }
 
 .message.right {
@@ -29,5 +33,10 @@
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@media only screen and (max-width: 600px) {
+  .message {
+    max-width: 90%;
   }
 }

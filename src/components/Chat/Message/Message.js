@@ -1,8 +1,9 @@
+import { Avatar } from "@material-ui/core";
 import React, { useContext, useEffect, useRef } from "react";
 import userContext from "../../../contexts/UserContext";
 import messageStyles from "./Message.module.css";
 
-function Message({ content, userId }) {
+function Message({ content, userId, photoUrl }) {
   const { user } = useContext(userContext);
   const dummy = useRef();
   const checkUser = () => {
@@ -17,7 +18,8 @@ function Message({ content, userId }) {
   }, []);
   return (
     <div ref={dummy} className={`${messageStyles.message} ${checkUser()}`}>
-      <p>{content}</p>
+      <Avatar src={photoUrl} />
+      <p className={messageStyles.content}>{content}</p>
     </div>
   );
 }

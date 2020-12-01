@@ -29,7 +29,7 @@
   background: transparent;
   border: none;
 }
-.buttom:focus {
+.button:focus {
   outline: none;
 }
 .MuiSvgIconRoot {

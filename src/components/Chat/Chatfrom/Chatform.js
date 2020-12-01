@@ -28,7 +28,10 @@ function Chatform() {
           onChange={(e) => {
             setInput(e.target.value);
           }}></input>
-        <button type="submit" className={chatFormStyles.button}>
+        <button
+          type="submit"
+          className={chatFormStyles.button}
+          disabled={!input}>
           <SendRoundedIcon className={chatFormStyles.MuiSvgIconRoot} />
         </button>
       </form>
